@@ -78,6 +78,27 @@ describe("iCalendar", function() {
             'END:VCALENDAR\r\n', vevent.toString());
     });
 
+    it('Outputs full day VEvents correctly if setDate is used', function() {
+      // VEvent objects need to get a calendar wrapper...
+      var vevent = new icalendar.VEvent('testuid@daybilling.com');
+      vevent.setDate(new Date(Date.UTC(2011,10,12,00,00,00)),
+          new Date(Date.UTC(2011,10,13,00,00,00)), true);
+
+      var dtstamp = icalendar.format_value('DATE-TIME', vevent.getPropertyValue('DTSTAMP'));
+
+      assert.equal(
+          'BEGIN:VCALENDAR\r\n'+
+          'VERSION:2.0\r\n'+
+          'PRODID:'+icalendar.PRODID+'\r\n'+
+          'BEGIN:VEVENT\r\n'+
+          'DTSTAMP:'+dtstamp+'\r\n'+
+          'UID:testuid@daybilling.com\r\n'+
+          'DTSTART;VALUE=DATE:2011 11 12\r\n'+
+          'DTEND;VALUE=DATE:2011 11 13\r\n'+
+          'END:VEVENT\r\n'+
+          'END:VCALENDAR\r\n', vevent.toString());
+    });
+
     it('wraps long lines correctly', function() {
         var vevent = new icalendar.VEvent('testuid@daybilling.com');
         vevent.setDate(new Date(Date.UTC(2011,11,2,16,59,00)), 3600);
