@@ -93,8 +93,8 @@ describe("iCalendar", function() {
           'BEGIN:VEVENT\r\n'+
           'DTSTAMP:'+dtstamp+'\r\n'+
           'UID:testuid@daybilling.com\r\n'+
-          'DTSTART;VALUE=DATE:2011 11 12\r\n'+
-          'DTEND;VALUE=DATE:2011 11 13\r\n'+
+          'DTSTART;VALUE=DATE:20111112\r\n'+
+          'DTEND;VALUE=DATE:20111113\r\n'+
           'END:VEVENT\r\n'+
           'END:VCALENDAR\r\n', vevent.toString());
     });
